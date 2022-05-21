@@ -53,6 +53,14 @@ For examples, see these brief tutorials for [Blender](demo/blender.md) or [Meshm
       -M MAXIMUM, --maximum MAXIMUM
                             Omit vertices above maximum elevation
 
+## Docker Usage
+
+Skip installing GDAL and just use docker! Specify all the same args to `phstl_docker.sh`
+
+```commandline
+./phstl_docker.sh -v -w -90.900995 32.312693 -90.832037 32.379813 -z 2 -r EPSG:3395 USGS_13_n33w091_20171205.tiff out9.stl
+```
+
 ## Personal Examples
 
 - Vicksburg, no reproject, with Z scaled from meters to degrees
