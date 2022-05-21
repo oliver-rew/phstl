@@ -5,6 +5,7 @@ import logging
 from collections import deque
 from struct import pack, unpack
 import os
+import random
 
 import numpy as np
 
@@ -148,13 +149,11 @@ if args.reproject != None:
 # apply our warps to the input dataset
 last = args.RASTER
 for i in range(len(warps)):
-    temp_file = f".tmp_{i}.tiff"
+    temp_file = f".tmp_{random.randint(0, 1 << 30)}_{i}.tiff"
     warp = warps[i]
     log(f"warp {i} = {temp_file}")
     warp = gdal.Warp(temp_file, last, options=warp)
     warp = None  # closes the files
-    if i != 0:
-        os.remove(last)
     last = temp_file
 
 try:
@@ -404,3 +403,8 @@ with stlwriter(args.STL, facetcount) as mesh:
         gdal.TermProgress(float(y + 1) / mh)
 
 log("actual facet count: %s" % str(mesh.written))
+
+# remove temp files
+for f in os.listdir("."):
+    if f.startswith(".tmp_"):
+        os.remove(f)

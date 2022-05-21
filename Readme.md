@@ -57,7 +57,7 @@ For examples, see these brief tutorials for [Blender](demo/blender.md) or [Meshm
 
 Skip installing GDAL and just use docker! Specify all the same args to `phstl_docker.sh`
 
-```commandline
+```
 ./phstl_docker.sh -v -w -90.900995 32.312693 -90.832037 32.379813 -z 2 -r EPSG:3395 USGS_13_n33w091_20171205.tiff out9.stl
 ```
 
@@ -65,14 +65,20 @@ Skip installing GDAL and just use docker! Specify all the same args to `phstl_do
 
 - Vicksburg, no reproject, with Z scaled from meters to degrees
 
-```commandline
+```
 python3 phstl.py -v -w -90.900995 32.312693 -90.832037 32.379813 -z 0.00000898311982 USGS_13_n33w091_20171205.tiff out.stl
 ```
 
-- Vicksburg, reprojected to World Mercator (EPSG:3395), scaling
+- Vicksburg, reprojected to World Mercator (EPSG:3395), no scaling
 
-```commandline
- python3 phstl.py -v -w -90.900995 32.312693 -90.832037 32.379813 -r EPSG:3395 USGS_13_n33w091_20171205.tiff out.stl
+```
+python3 phstl.py -v -w -90.900995 32.312693 -90.832037 32.379813 -r EPSG:3395 USGS_13_n33w091_20171205.tiff out.stl
+```
+
+- Vicksburg, reprojected to World Mercator (EPSG:3395), no Z scaling, x scaled to 310mm
+
+```
+python3 phstl.py -v -w -90.900995 32.312693 -90.832037 32.379813 -z 2 -x 310 -r EPSG:3395 USGS_13_n33w091_20171205.tiff out.stl
 ```
 
 ## Prerequisites
