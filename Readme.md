@@ -14,15 +14,20 @@ To create a [surface mesh](demo/example.stl) from it, type:
 
 ![mesh output](demo/examplemesh.png)
 
-By default, the output is scaled such that one mesh unit represents one unit of the input coordinate system. Since the input image resolution is 46 x 38 at about 12.8 feet per pixel (thus an extent of roughly 592 x 482 feet), the output mesh extent is about 580 x 470 units.
+By default, the output is scaled such that one mesh unit represents one unit of the input coordinate system. Since the
+input image resolution is 46 x 38 at about 12.8 feet per pixel (thus an extent of roughly 592 x 482 feet), the output
+mesh extent is about 580 x 470 units.
 
-To scale the output to fit a certain size, use the `-x` or `-y` extent option. To exaggerate vertical relief, use the `-z` factor option. To anchor the dataset's lowest elevation at Z = 0, use the `-c` option to automatically clip elevation values. Here's a [second example](demo/example2.stl):
+To scale the output to fit a certain size, use the `-x` or `-y` extent option. To exaggerate vertical relief, use
+the `-z` factor option. To anchor the dataset's lowest elevation at Z = 0, use the `-c` option to automatically clip
+elevation values. Here's a [second example](demo/example2.stl):
 
 	phstl -x 100 -z 3 -c example.tif example2.stl
 
 ![customized mesh output](demo/examplemesh2.png)
 
-The output surface mesh is not a manifold object. Use another tool to solidify the model in preparation for 3D printing. For examples, see these brief tutorials for [Blender](demo/blender.md) or [Meshmixer](demo/meshmixer.md).
+The output surface mesh is not a manifold object. Use another tool to solidify the model in preparation for 3D printing.
+For examples, see these brief tutorials for [Blender](demo/blender.md) or [Meshmixer](demo/meshmixer.md).
 
 ## Usage
 
@@ -47,7 +52,21 @@ The output surface mesh is not a manifold object. Use another tool to solidify t
                             Omit vertices below minimum elevation
       -M MAXIMUM, --maximum MAXIMUM
                             Omit vertices above maximum elevation
- 
+
+## Personal Examples
+
+- Vicksburg, no reproject, with Z scaled from meters to degrees
+
+```commandline
+python3 phstl.py -v -w -90.900995 32.312693 -90.832037 32.379813 -z 0.00000898311982 USGS_13_n33w091_20171205.tiff out.stl
+```
+
+- Vicksburg, reprojected to World Mercator (EPSG:3395), scaling
+
+```commandline
+ python3 phstl.py -v -w -90.900995 32.312693 -90.832037 32.379813 -r EPSG:3395 USGS_13_n33w091_20171205.tiff out.stl
+```
+
 ## Prerequisites
 
 - [GDAL/OGR in Python](http://trac.osgeo.org/gdal/wiki/GdalOgrInPython) (`sudo easy_install gdal`)

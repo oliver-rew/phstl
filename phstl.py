@@ -146,7 +146,7 @@ if args.window != None:
 
 if args.reproject != None:
     log(f'reprojecting to {args.reproject}...')
-    gdal.WarpOptions(dstSRS=args.reproject)
+    warps.append(gdal.WarpOptions(dstSRS=args.reproject))
 
 # apply our warps to the input dataset
 last = args.RASTER
@@ -156,6 +156,8 @@ for i in range(len(warps)):
     log(f"warp {i} = {temp_file}")
     warp = gdal.Warp(temp_file, last, options=warp)
     warp = None  # closes the files
+    if i != 0:
+        os.remove(last)
     last = temp_file
 
 try:
