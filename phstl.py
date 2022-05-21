@@ -48,9 +48,6 @@ def NormalVector(t):
     cpx = np.float32(e1y * e2z) - np.float32(e1z * e2y)
     cpy = np.float32(e1z * e2x) - np.float32(e1x * e2z)
     cpz = np.float32(e1x * e2y) - np.float32(e1y * e2x)
-    if cpx == cpy == cpz == 0:
-        print(cpx, cpy, cpx)
-        raise Exception("dasdas")
 
     # return cross product vector normalized to unit length
     mag = np.sqrt(np.power(cpx, 2) + np.power(cpy, 2) + np.power(cpz, 2))
@@ -361,7 +358,6 @@ with stlwriter(args.STL, facetcount) as mesh:
             bv = pixels[ww + x]
             cv = pixels[x + 1]
             dv = pixels[ww + x + 1]
-            # print("STAT:", av, bv, cv, dv, zmin)
 
             # Apply transforms to obtain output mesh coordinates of the
             # four corners composed of raster points a (x, y), b, c,
